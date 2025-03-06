@@ -15,38 +15,70 @@
             padding: 10px;
             font-size: 16px;
         }
+        p {
+            font-size: 18px;
+        }
+        .explanation {
+            margin-bottom: 50px;
+            font-size: 16px;
+            color: gray;
+        }
+        .computer-output {
+            font-size: 22px;
+            font-weight: bold;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
     <h1>Klopf, Klopf! Wer da?</h1>
-    <p>Klopf-Klopf-Witze sind klassische Wortspiele, bei denen eine lustige Pointe aus einem Namen oder Wortspiel entsteht.</p>
+    <p class="explanation">Klopf-Klopf-Witze sind klassische Wortspiele, bei denen eine lustige Pointe aus einem Namen oder Wortspiel entsteht.</p>
     
+    <p id="knockKnock" class="computer-output" style="opacity: 1;">Klopf, Klopf!</p>
     <input type="text" id="userInput" placeholder="Antwort eingeben...">
     <button onclick="startJoke()">Weiter</button>
     
-    <p id="jokeSetup"></p>
+    <p id="jokeSetup" class="computer-output" style="display: none;"></p>
     <input type="text" id="userResponse" style="display:none;" placeholder="Antwort eingeben...">
     <button id="punchlineBtn" onclick="showPunchline()" style="display:none;">Weiter</button>
     
-    <p id="punchline"></p>
+    <p id="punchline" class="computer-output" style="display: none;"></p>
     
     <script>
         let jokes = {
-            "Daisy": "Daisy me rollin', they hatin'",
-            "Maja": "Maja - hi, Maja-ha, Maja-ho, Maja-haha",
-            "Luke": "Luke doch mal nach draußen, dann weißt du es."
+            "Daisy": "Daisy me rollin', they hatin' 😂",
+            "Maja": "Maja - hi, Maja-ha, Maja-ho, Maja-haha 😂",
+            "Luke": "Luke doch mal nach draußen, dann weißt du es. 😂"
         };
         let chosenJoke = "";
         
         function startJoke() {
+            let userResponse = document.getElementById("userInput").value;
+            if (!userResponse) {
+                alert("Bitte eine Antwort eingeben!");
+                return;
+            }
+            
             chosenJoke = Object.keys(jokes)[Math.floor(Math.random() * Object.keys(jokes).length)];
-            document.getElementById("jokeSetup").innerText = chosenJoke;
+            let jokeSetup = document.getElementById("jokeSetup");
+            jokeSetup.innerText = chosenJoke;
+            jokeSetup.style.display = "block";
+            jokeSetup.style.animation = "fadeIn 1s forwards";
+            
             document.getElementById("userResponse").style.display = "inline";
             document.getElementById("punchlineBtn").style.display = "inline";
         }
         
         function showPunchline() {
-            document.getElementById("punchline").innerText = jokes[chosenJoke];
+            let punchline = document.getElementById("punchline");
+            punchline.innerText = jokes[chosenJoke];
+            punchline.style.display = "block";
+            punchline.style.animation = "fadeIn 1s forwards";
         }
     </script>
 </body>
