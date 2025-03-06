@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klopf, Klopf</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input, button {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Klopf, Klopf! Wer da?</h1>
+    <p>Klopf-Klopf-Witze sind klassische Wortspiele, bei denen eine lustige Pointe aus einem Namen oder Wortspiel entsteht.</p>
+    
+    <input type="text" id="userInput" placeholder="Antwort eingeben...">
+    <button onclick="startJoke()">Weiter</button>
+    
+    <p id="jokeSetup"></p>
+    <input type="text" id="userResponse" style="display:none;" placeholder="Antwort eingeben...">
+    <button id="punchlineBtn" onclick="showPunchline()" style="display:none;">Weiter</button>
+    
+    <p id="punchline"></p>
+    
+    <script>
+        let jokes = {
+            "Daisy": "Daisy me rollin', they hatin'",
+            "Maja": "Maja - hi, Maja-ha, Maja-ho, Maja-haha",
+            "Luke": "Luke doch mal nach draußen, dann weißt du es."
+        };
+        let chosenJoke = "";
+        
+        function startJoke() {
+            chosenJoke = Object.keys(jokes)[Math.floor(Math.random() * Object.keys(jokes).length)];
+            document.getElementById("jokeSetup").innerText = chosenJoke;
+            document.getElementById("userResponse").style.display = "inline";
+            document.getElementById("punchlineBtn").style.display = "inline";
+        }
+        
+        function showPunchline() {
+            document.getElementById("punchline").innerText = jokes[chosenJoke];
+        }
+    </script>
+</body>
+</html>
